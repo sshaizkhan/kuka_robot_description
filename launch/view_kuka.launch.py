@@ -44,10 +44,18 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "kuka_type",
             description="Type/series of used UR robot.",
-            choices=["kr6_r700_sixx", "kr6_r900_sixx",
-                     "kr10_r1100_2", "kr16_r2010_2", "kr210_r2700_2",
-                     "kr210_r3100_2", "kr560_r3100_2", "lbr_iisy3_r760",
-                     "lbr_iisy11_r1300", "lbr_iisy15_r930"],
+            choices=[
+                "kr6_r700_sixx",
+                "kr6_r900_sixx",
+                "kr10_r1100_2",
+                "kr16_r2010_2",
+                "kr210_r2700_2",
+                "kr210_r3100_2",
+                "kr560_r3100_2",
+                "lbr_iisy3_r760",
+                "lbr_iisy11_r1300",
+                "lbr_iisy15_r930",
+            ],
         )
     )
     # General arguments
@@ -88,7 +96,8 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare(description_package), "urdf", description_file]),
+                [FindPackageShare(description_package), "urdf", description_file]
+            ),
             " ",
             "name:=",
             "kuka",
@@ -100,12 +109,12 @@ def generate_launch_description():
             tf_prefix,
         ]
     )
-    robot_description = {"robot_description": ParameterValue(
-        robot_description_content, value_type=str)}
+    robot_description = {
+        "robot_description": ParameterValue(robot_description_content, value_type=str)
+    }
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(description_package), "rviz",
-         "view_6_axis_urdf.rviz"]
+        [FindPackageShare(description_package), "rviz", "view_6_axis_urdf.rviz"]
     )
 
     joint_state_publisher_node = Node(
